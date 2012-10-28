@@ -3,19 +3,19 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" type="text/css" href="styles.css" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+	<script src="js/EXPO.Events.js" type="text/javascript"></script>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/Work.js" type="text/javascript"></script>
-    <script src="js/EXPO.Events.js" type="text/javascript"></script>
 	<title>EXPO Presentation</title>
 </head>
 
 <body>
-	<div id="main-right">
+	<div id="main-right" style="display: none;">
     	<div id="interface">
     		<img id="interf" src="img/interface.png" />
         </div>
         <div id="interf-pres" class="presentation-block">        	
-        	<video id="interf-video" class="video" loop="false">
+        	<video id="interf-video" class="video">
             	<source src="video/1.ogg" type="Video/Ogg" />
             </video>
         </div>
@@ -75,7 +75,8 @@
     <div id="select-window-bg">
     </div>
     <div id="select-window" class="opacity">
-    	<span id="select-session">
+    	<div id="select-main">
+        <span id="select-session">
         	<p>Select a session: </p>
             <select id="session">
             </select>
@@ -91,6 +92,11 @@
             <p><input type="radio" name="position" id="right-screen" />Right Screen</p>
         </span>
         <input type="button" id="start-pres" value="Start" />
+        </div>
+        <div id="wait-main" style="display: none;">
+        	<image src="img/load.gif" class="loader" />
+            <p id="wait-text" class="wait">Connecting....</p>
+        </div>
     </div>
 </body>
 </html>

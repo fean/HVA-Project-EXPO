@@ -10,7 +10,10 @@ $(function() {
 									 top: '50%',
 									 left: '50%'}
 									, 150, 'swing', function() {
-		document.getElementById('select-window').innerHTML = '<image src="img/load.gif" class="loader" /><p class="wait">Waiting....</p>';
+			$('#select-main').hide(); $('#wait-main').show();
+			setInterval(function() {
+				$('#wait-text').text('Waiting....');
+			}, 5000);
 		});
     });
 	
@@ -33,7 +36,7 @@ $(function() {
 		if (position) {
 				hideElementsRight(function() {
 					setInterval(function() {
-						animatePartialRight('#', function() {
+						startAnimatePartialRight('#', function() {
 							$('#sw-video').show();
 							document.getElementById('sw-video').play();						
 						});
@@ -41,7 +44,7 @@ $(function() {
 				});
 		} else {
 			hideElementsLeft(function() {
-				animateMain('#sw-pres', function() {
+				startAnimateMain('#sw-pres', function() {
 					//TODO: Make the magic happen		
 				});
 			});
@@ -52,7 +55,7 @@ $(function() {
         if (position) {
 			hideElementsRight(function() {
 				setInterval(function() {
-					animatePartialRight('#hw-pres-right', function() {
+					startAnimatePartialRight('#hw-pres-right', function() {
 						$('#hw-video').show();
 						document.getElementById('hw-video').play();
 					});
@@ -60,7 +63,7 @@ $(function() {
 			});
 		} else {
 			hideElementsLeft(function() {
-				animateMain('#hw-pres', function() {
+				startAnimateMain('#hw-pres', function() {
 					//TODO: Make the magic happen		
 				});
 			});
@@ -70,7 +73,7 @@ $(function() {
 	eventHandler.registerEvent('StartHCD', function() {
 		if (position) {
 			hideElementsRight(function() { 
-				animateMain('#interf-pres', function() {
+				startAnimateMain('#interf-pres', function() {
 					$('#interf-video').show();
 					document.getElementById('interf-video').play();
 				});
@@ -78,7 +81,7 @@ $(function() {
 		} else {
 			hideElementsLeft(function() {
 				setInterval(function() {
-					animatePartialLeft('#interf-pres-left', function() {
+					startAnimatePartialLeft('#interf-pres-left', function() {
 						//TODO: Make the magic happen					
 					});
 				}, 450);
@@ -89,7 +92,7 @@ $(function() {
 	eventHandler.registerEvent('StartITM', function() {
 		if (position) {
 			hideElementsRight(function() { 
-				animateMain('#manage-pres', function() {
+				startAnimateMain('#manage-pres', function() {
 					$('#manage-video').show();
 					document.getElementById('manage-video').play();
 				});
@@ -97,7 +100,7 @@ $(function() {
 		} else {
 			hideElementsLeft(function() { 
 				setInterval(function() {
-					animatePartialLeft('#manage-pres-left', function() {
+					startAnimatePartialLeft('#manage-pres-left', function() {
 						//TODO: Make the magic happen
 					});
 				}, 450);
@@ -109,7 +112,7 @@ $(function() {
 		if (position) {
 			hideElementsRight(function() {
 				setInterval(function() {
-					animatePartialRight('#network-pres-right', function() {
+					startAnimatePartialRight('#network-pres-right', function() {
 						$('#network-video').show();
 						document.getElementById('network-video').play();
 					});
@@ -117,7 +120,7 @@ $(function() {
 			});
 		} else {
 			hideElementsLeft(function() {
-				animateMain('#network-pres', function() {
+				startAnimateMain('#network-pres', function() {
 					//TODO: Make the magic happen			
 				});
 			});	
@@ -139,6 +142,17 @@ function hideElementsRight(method) {
 	setInterval(method, 550);
 }
 
+function showElementsRight(method) {
+	$('#management').show();
+	$('#interface').show();
+	$('#itopia').show();
+	$('#interf').animate({opacity: 1}, 150, 'swing', function() {
+		$('#manage').animate({opacity: 1}, 150, 'swing', function() {
+			$('#logo').animate({opacity: 1}, 150, 'swing', method);
+		});
+	});
+}
+
 function hideElementsLeft(method) {
 	$('#network').animate({opacity: 0}, 150, 'swing', function() {
 		$('#hardware').animate({opacity: 0}, 150, 'swing', function() {
@@ -152,7 +166,18 @@ function hideElementsLeft(method) {
 	setInterval(method, 550);
 }
 
-function animateMain(selector, complete) {
+function showElementsLeft(method) {
+	$('#software').show();
+	$('#hardware').show();
+	$('#network').show();
+	$('#software').animate({opacity: 1}, 150, 'swing', function() {
+		$('#hardware').animate({opacity: 1}, 'swing', function() {
+			$('#network').animate({opacity: 1}, 150, 'swing', method);
+		});
+	});
+}
+
+function startAnimateMain(selector, complete) {
 	$(selector).show();
 	$(selector).animate({top: '5%',
 						 left: 0, 
@@ -161,13 +186,33 @@ function animateMain(selector, complete) {
 						 opacity: 1.0}, 400, 'swing', complete);
 }
 
-function animatePartialRight(selector, complete) {
+function endAnimateMain(selector, complete) {
+	$(selector).animate({top: '45%',
+						 left: '45%', 
+						 width: '10%',
+						 height: '10%', 
+						 opacity: 0}, 400, 'swing', complete);
+	$(selector).hide();
+}
+
+function startAnimatePartialRight(selector, complete) {
 	$(selector).show();
 	$(selector).animate({width: '100%'}, 400, 'swing', complete);
 }
 
-function animatePartialLeft(selector, complete) {
+function endAnimatePartialRight(selector, complete) {
+	$(selector).animate({width: '0%'}, 400, 'swing', complete);
+	$(selector).hide();	
+}
+
+function startAnimatePartialLeft(selector, complete) {
 	$(selector).show();
 	$(selector).animate({width: '100%',
 						 left: '0%'}, 400, 'swing', complete);
+}
+
+function endAnimatePartialLeft(selector, complete) {
+	$(selector).animate({width: '0%',
+						 left: '100%'}, 400, 'swing', complete);
+	$(selector).hide();
 }
