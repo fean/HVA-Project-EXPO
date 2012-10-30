@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "EXPO Presentation";
 }
-
-	<div id="main-right" xstyle="display: none;">
+	<div id="main-right" style="display: none;">
     	<div id="interface">
     		<img id="interf" src="Content/img/interface.png" />
         </div>
@@ -24,8 +23,7 @@
 		<div id="itopia">
 			<center><img id="logo" src="Content/img/itopia-logo.png" /></center>
 		</div>
-        
-        <div id="sw-pres-right" class="presentation-block right-page">
+                <div id="sw-pres-right" class="presentation-block right-page">
         	<video id="sw-video" class="video" loop="false">
             	<source src="Content/video/1.ogg" type="Video/Ogg" />
             </video>
@@ -67,6 +65,10 @@
         </div>
     </div>
     
+    <video id="market-loop" class="presentation-block" data-playing="false">
+        <source src="Content/video/1.ogg" type="video/ogg" />
+    </video>
+
     <div id="select-window-bg">
     </div>
     <div id="select-window" class="opacity">

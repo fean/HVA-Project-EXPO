@@ -1,7 +1,7 @@
 var eventHandler = new EventHandler('');
-var position; var waiting;
+var position; var waiting = true;
 
-$(function() {
+$(function () {
 	$('#start-pres').click(function() {
         $('#select-window').animate({width: '210px',
 									 height: '70px',
@@ -18,8 +18,20 @@ $(function() {
     });
 	
 	eventHandler.registerEvent('StartLoop', function() {
-		if (!waiting) {
-			
+	    if (!waiting) {
+	        if ($('#market-video').attr('data-playing') == 'false') {
+	            $('#market-video').show();
+	            $('#market-video').animate({
+	                width: '100%',
+	                height: '100%',
+	                opacity: 1,
+	                top: 0,
+	                left: 0
+	            }, 200, 'swing', function () {
+	                document.getElementById('market-video').play();
+	                $('#market-video').attr('data-playing', 'true');
+	            });
+	        }
 		} else {
 			$('#select-window').hide();
 			$('#select-window-bg').animate({opacity: 0}, 150, 'swing', function() {
@@ -29,7 +41,20 @@ $(function() {
 	});
 	
 	eventHandler.registerEvent('ExitLoop', function() {
-		
+	    if (!waiting) {
+	        if ($('#market-video').attr('data-playing') == 'true') {
+	            document.getElementById('market-video').pause();
+	            $('#market-video').animate({
+	                top: '45%',
+	                left: '45%',
+	                width: '10%',
+	                height: '10%',
+	                opacity: 0
+	            }, 200, 'swing', function () {
+	                $('#market-video').hide();
+	            });
+	        }
+	    }
 	});
 	
 	eventHandler.registerEvent('StartSE', function() {
@@ -126,6 +151,8 @@ $(function() {
 			});	
 		}
 	});
+
+    
 	
 });
 
