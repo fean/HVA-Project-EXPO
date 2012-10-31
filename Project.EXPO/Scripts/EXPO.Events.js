@@ -17,7 +17,7 @@
             }
         };
         eSource.onopen = function () {
-            complete();
+            success();
         };
 
     };
