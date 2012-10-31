@@ -34,7 +34,7 @@
             </video>
         </div>
         <div id="network-pres-right" class="presentation-block right-page">
-            <video id="network-video" class="video" loop="false">
+            <video id="network-video" class="video">
             	<source src="Content/video/1.ogg" type="Video/Ogg" />
             </video>
         </div>
@@ -88,10 +88,10 @@
         	<p><input type="radio" name="position" id="left-screen" />Left Screen</p>
             <p><input type="radio" name="position" id="right-screen" />Right Screen</p>
         </span>
-        <input type="button" id="start-pres" value="Start" />
+        <input type="button" id="start-pres" value="Start" disabled />
         </div>
         <div id="wait-main" style="display: none;">
-        	<image src="Content/img/load.gif" class="loader" />
+        	<image id="wait-img" src="Content/img/load.gif" class="loader" />
             <p id="wait-text" class="wait">Connecting....</p>
         </div>
     </div>

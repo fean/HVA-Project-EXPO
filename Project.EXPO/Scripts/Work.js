@@ -1,6 +1,7 @@
 var eventHandler = new EventHandler('');
 var position; var waiting = true;
 
+//Start-up
 $(function () {
 	$('#start-pres').click(function() {
         $('#select-window').animate({width: '210px',
@@ -10,10 +11,19 @@ $(function () {
 									 top: '50%',
 									 left: '50%'}
 									, 150, 'swing', function() {
-			$('#select-main').hide(); $('#wait-main').show();
-			setInterval(function() {
-				$('#wait-text').text('Waiting....');
-			}, 5000);
+			                            $('#select-main').hide(); $('#wait-main').show();
+			                            if (true) {
+			                                try {
+			                                    eventHandler.startListener(function () {
+			                                        $('#wait-text').text('Waiting....');
+			                                    });
+			                                } catch (e) {
+			                                    $('#wait-text').text('Error Occurred!');
+			                                    $('#wait-img').attr('src', 'Content/img/error.png');
+			                                }
+			                            } else {
+
+			                            }
 		});
     });
 	
@@ -151,11 +161,10 @@ $(function () {
 			});	
 		}
 	});
-
-    
-	
+	doGetSessions();
 });
 
+//Visual Engine
 function hideElementsRight(method) {
 	$('#logo').animate({opacity: 0}, 150, 'swing', function() {
 		$('#manage').animate({opacity: 0}, 150, 'swing', function() {
@@ -242,4 +251,17 @@ function endAnimatePartialLeft(selector, complete) {
 	$(selector).animate({width: '0%',
 						 left: '100%'}, 400, 'swing', complete);
 	$(selector).hide();
+}
+
+//Async functions
+function doGetSessions() {
+    var sessions = eventHandler.getAvailableSessions();
+    if (sessions !== null) {
+        for (e in sessions) {
+            $('#').append('<option value="' + session[e].Token + '">' + sessions[e].Token + '</option>');
+        }
+    } else {
+        $('#session').append('<option value="none">No Sessions</option>');
+        setInterval(750, doGetSessions);
+        }
 }
