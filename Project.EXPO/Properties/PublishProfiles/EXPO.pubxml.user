@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAEjCiusMmiEqUDwsDPEO6cgAAAAACAAAAAAAQZgAAAAEAACAAAACYJaRQQkYAWg4vT6A6ZhEPx5zV6zL9Og7SUFRuDBKdigAAAAAOgAAAAAIAACAAAADy4V/Zl6MrUblRw3NR//f73/2ijEs3dQyA/DJsJwDjKiAAAAC5kf2yLDzeNcbFf+kUAlshg9z346Vu/qCMwsp18PU+UUAAAADCN2cHg8IMlgvpoR+UWyeL8T9IyujVuRZ9wXbRy5C7bVglkIW2rRxqc04XpGN2vEE57WKigbN0TMZVTuM2FWH5</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>10/31/2012 15:42:47</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/31/2012 15:42:47</publishTime>
+    </File>
+    <File Include="bin/Project.EXPO.dll">
+      <publishTime>10/31/2012 16:44:22</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.dll">
+      <publishTime>10/31/2012 15:42:47</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.WebRequest.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Providers.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="Content/img/hardware.png">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="Content/img/interface.png">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="Content/img/itopia-logo.png">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="Content/img/load.gif">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="Content/img/management.png">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="Content/img/network.png">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="Content/img/software.png">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="Content/styles.css">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>10/31/2012 15:42:45</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="Scripts/EXPO.Events.js">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="Scripts/jquery.min.js">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="Scripts/Work.js">
+      <publishTime>10/31/2012 16:04:00</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>10/31/2012 15:42:46</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/31/2012 16:44:23</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

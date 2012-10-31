@@ -268,11 +268,10 @@ function doGetSessions() {
     var sessions = eventHandler.getAvailableSessions();
     if (sessions !== null) {
         for (e in sessions) {
-            var token = sessions[e].Token;
-            $('#session').append('<option value="' + token + '">' + token + '</option>');
+            $('#').append('<option value="' + session[e].Token + '">' + sessions[e].Token + '</option>');
         }
     } else {
         $('#session').append('<option value="nothing">No Sessions</option>');
+        setInterval(750, doGetSessions);
     }
-    setInterval(750, doGetSessions);
 }

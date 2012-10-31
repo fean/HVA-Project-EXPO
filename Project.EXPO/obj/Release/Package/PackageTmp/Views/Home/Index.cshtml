@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "EXPO Presentation";
+}
+	<div id="main-right" style="display: none;">
+    	<div id="interface">
+    		<img id="interf" src="Content/img/interface.png" />
+        </div>
+        <div id="interf-pres" class="presentation-block">        	
+        	<video id="interf-video" class="video">
+            	<source src="Content/video/1.ogg" type="Video/Ogg" />
+            </video>
+        </div>
+        
+    	<div id="management">
+			<img id="manage" src="Content/img/management.png" />
+       	</div>
+        <div id="manage-pres" class="presentation-block">
+        	<video id="manage-video" class="video" loop="false">
+            	<source src="Content/video/1.ogg" type="Video/Ogg" />
+            </video>
+        </div>
+        
+		<div id="itopia">
+			<center><img id="logo" src="Content/img/itopia-logo.png" /></center>
+		</div>
+                <div id="sw-pres-right" class="presentation-block right-page">
+        	<video id="sw-video" class="video" loop="false">
+            	<source src="Content/video/1.ogg" type="Video/Ogg" />
+            </video>
+        </div>
+        <div id="hw-pres-right" class="presentation-block right-page">
+            <video id="hw-video" class="video">
+            	<source src="Content/video/1.ogg" type="Video/Ogg" />
+            </video>
+        </div>
+        <div id="network-pres-right" class="presentation-block right-page">
+            <video id="network-video" class="video">
+            	<source src="Content/video/1.ogg" type="Video/Ogg" />
+            </video>
+        </div>
+    </div>
+    
+    <div id="main-left" style="display: none;">
+    	<div id="software">
+    		<img id="sw" src="Content/img/software.png" />
+        </div>
+        <div id="sw-pres" class="presentation-block">
+        </div>
+        
+    	<div id="hardware">
+			<img id="hw" src="Content/img/hardware.png" />
+       	</div>
+        <div id="hw-pres" class="presentation-block">
+        </div>
+        
+		<div id="network">
+			<img id="nw" src="Content/img/network.png" />
+		</div>
+        <div id="network-pres" class="presentation-block">
+        </div>
+
+        <div id="interf-pres-left" class="presentation-block left-page">
+        </div>
+        <div id="manage-pres-left" class="presentation-block left-page">        	
+        </div>
+    </div>
+    
+    <video id="market-loop" class="presentation-block" data-playing="false">
+        <source src="Content/video/1.ogg" type="video/ogg" />
+    </video>
+
+    <div id="select-window-bg">
+    </div>
+    <div id="select-window" class="opacity">
+    	<div id="select-main">
+        <span id="select-session">
+        	<p>Select a session: </p>
+            <select id="session">
+            </select>
+        </span>
+        <span id="session-info">
+        	<p>Session Information</p>
+            <p>Session Token: </p><p id="token"></p>
+            <p>Left Screen Taken: </p><p id="left-taken"></p>
+            <p>Right Screen Taken: </p><p id="right-taken"></p>
+        </span>
+        <span id="screen-position">
+        	<p><input type="radio" name="position" id="left-screen" />Left Screen</p>
+            <p><input type="radio" name="position" id="right-screen" />Right Screen</p>
+        </span>
+        <input type="button" id="start-pres" value="Start" />
+        </div>
+        <div id="wait-main" style="display: none;">
+        	<image id="wait-img" src="Content/img/load.gif" class="loader" />
+            <p id="wait-text" class="wait">Connecting....</p>
+        </div>
+    </div>

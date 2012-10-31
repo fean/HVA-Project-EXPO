@@ -21,18 +21,12 @@ namespace Project.EXPO.Controllers
 
         #region "Client Send Events"
 
-        public ActionResult Create(string verifier)
+        public ActionResult Create()
         {
-            if (verifier == Convert.ToBase64String((new HMACMD5()).ComputeHash(Encoding.ASCII.GetBytes("EXPO4486078"))))
-            {
                 String token = Convert.ToBase64String((new HMACMD5()).ComputeHash(Encoding.ASCII.GetBytes((new Random()).Next(10000, 999999999).ToString())));
+                token = token.Remove(token.Length - 2).Replace("+", string.Empty).Replace("/", string.Empty).Replace("=", string.Empty).ToLower();
                 Collective.SessionPool.Add(token, new SessionWrap());
                 return Content(Serializer.Serialize(new SessionResult() { Action = true, SessionToken = token }));
-            }
-            else
-            {
-                return Content(Serializer.Serialize(new StandardResult() { Action = false }));
-            }
         }
         
         public ActionResult StartLoop(string token)
