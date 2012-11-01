@@ -15,10 +15,10 @@ $(function () {
             }, 150, 'swing', function () {
                 $('#select-main').hide(); $('#wait-main').show();
                 try {
-                    eventHandler.startListener(function () {
-                        $('#wait-text').text('Waiting....');
-                        position = $('#right-screen').is(':checked');
-                    });
+                    eventHandler.setSessionToken($('#session').val());
+                    eventHandler.startListener();
+                    $('#wait-text').text('Waiting....');
+                    position = $('#right-screen').is(':checked');
                 } catch (e) {
                     $('#wait-text').text('Error Occurred!');
                     $('#wait-img').attr('src', 'Content/img/error.png');
@@ -29,7 +29,7 @@ $(function () {
         }
     });
 	
-    eventHandler.registerEvent('StartLoop', function () {
+    eventHandler.registerEvent('onStartLoop', function () {
         if (!waiting) {
             if ($('#market-video').attr('data-playing') == 'false') {
                 $('#market-video').show().animate({
@@ -48,11 +48,16 @@ $(function () {
             $('#select-window-bg').animate({ opacity: 0 }, 150, 'swing', function () {
                 waiting = false;
                 $('#select-window-bg').hide();
+                if (position) {
+                    $('#main-right').show();
+                } else {
+                    $('#main-left').show();
+                }
             });
         }
     });
 	
-    eventHandler.registerEvent('ExitLoop', function () {
+    eventHandler.registerEvent('onExitLoop', function () {
         if (!waiting) {
             if ($('#market-video').attr('data-playing') == 'true') {
                 document.getElementById('market-video').pause();
@@ -69,7 +74,7 @@ $(function () {
         }
     });
 	
-    eventHandler.registerEvent('StartSE', function () {
+    eventHandler.registerEvent('onStartSE', function () {
         if (position) {
             hideElementsRight(function () {
                 setInterval(function () {
@@ -88,7 +93,7 @@ $(function () {
         }
     });
 	
-    eventHandler.registerEvent('StartTC', function () {
+    eventHandler.registerEvent('onStartTC', function () {
         if (position) {
             hideElementsRight(function () {
                 setInterval(function () {
@@ -107,7 +112,7 @@ $(function () {
         }
     });
 	
-    eventHandler.registerEvent('StartHCD', function () {
+    eventHandler.registerEvent('onStartHCD', function () {
         if (position) {
             hideElementsRight(function () {
                 startAnimateMain('#interf-pres', function () {
@@ -126,7 +131,7 @@ $(function () {
         }
     });
 	
-    eventHandler.registerEvent('StartITM', function () {
+    eventHandler.registerEvent('onStartITM', function () {
         if (position) {
             hideElementsRight(function () {
                 startAnimateMain('#manage-pres', function () {
@@ -145,7 +150,7 @@ $(function () {
         }
     });
 	
-    eventHandler.registerEvent('StartSNE', function () {
+    eventHandler.registerEvent('onStartSNE', function () {
         if (position) {
             hideElementsRight(function () {
                 setInterval(function () {
@@ -163,7 +168,16 @@ $(function () {
             });
         }
     });
-	doGetSessions();
+
+    var sessions = eventHandler.getAvailableSessions();
+    if (sessions !== null) {
+        $('#session').html('');
+        for (e in sessions) {
+            $('#session').append('<option value="' + sessions[e].Token + '">' + sessions[e].Token + '</option>');
+        }
+    } else {
+        $('#session').html('<option value="nothing">No Sessions</option>');
+    }
 });
 
 //Visual Engine
@@ -261,17 +275,4 @@ function endAnimatePartialLeft(selector, complete) {
         left: '100%'
     }, 400, 'swing', complete);
     $(selector).hide();
-}
-
-//Async functions
-function doGetSessions() {
-    var sessions = eventHandler.getAvailableSessions();
-    if (sessions !== null) {
-        for (e in sessions) {
-            $('#').append('<option value="' + session[e].Token + '">' + sessions[e].Token + '</option>');
-        }
-    } else {
-        $('#session').append('<option value="nothing">No Sessions</option>');
-        setInterval(750, doGetSessions);
-    }
 }

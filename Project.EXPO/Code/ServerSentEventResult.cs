@@ -28,7 +28,7 @@ namespace Project.EXPO
                 {
                     try
                     {
-                        response.Write("retry:250\n");
+                        response.Write("retry:" + (new Random()).Next(200, 350) + "\n");
                         response.Write(string.Format("id:{0}\n", this.Version));
                         response.Write(string.Format("data:{0}\n\n", this.Content()));
                         response.End();

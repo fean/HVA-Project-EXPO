@@ -128,6 +128,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\error.png" />
     <Content Include="Content\img\hardware.png" />
     <Content Include="Content\img\interface.png" />
     <Content Include="Content\img\itopia-logo.png" />
@@ -178,7 +179,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>57613</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2843/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

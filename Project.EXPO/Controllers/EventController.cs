@@ -174,7 +174,8 @@ namespace Project.EXPO.Controllers
             {
                 ManualResetEvent Event = new ManualResetEvent(false);
                 int EID = (new Random()).Next(100, 10000000); Collective.SessionPool[token].EventPool.Add(EID, Event);
-                Event.WaitOne(); Collective.SessionPool[token].EventPool.Remove(EID);
+                Event.WaitOne(); 
+                Collective.SessionPool[token].EventPool.Remove(EID);
                 return new ServerSentEventResult()
                 {
                     Content = () =>
