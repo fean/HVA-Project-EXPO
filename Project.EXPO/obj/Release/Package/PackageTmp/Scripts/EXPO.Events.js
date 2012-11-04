@@ -1,6 +1,8 @@
 ﻿function EventHandler(sessionToken) {
     this.registeredEvents = new Array();
     var sessToken = sessionToken;
+    this.hasHook = false;
+
     this.registerEvent = function (name, e) {
         this.registeredEvents.push(new keyValuePair(name, e));
     };
@@ -18,6 +20,17 @@
         }
     };
 
+    this.getSession = function (token) {
+        var req = new XMLHttpRequest();
+        req.open('GET', 'event/getsession/?token=' + token, false); req.send();
+        var response = req.responseText;
+        if (response == 'Error: An error has occured, please try again.') {
+            return null;
+        } else {
+            return JSON.parse(response);
+        }
+    };
+
     function keyValuePair(key, value) {
         this.key = key;
         this.value = value;
@@ -30,19 +43,23 @@
 
 //Async functions
 function doConnect(instance, token) {
-    var eSource = new EventSource('event/hook/?token=' + token);
-
-    eSource.onmessage = function (e) {
-        var data = JSON.parse(e.data);
-        if (data.Data == 'true') {
-            for (e in instance.registeredEvents) {
-                e = instance.registeredEvents[e];
-                if (e.key == data.Event) {
-                    e.value();
+    if (!instance.hasHook) {
+        var eSource = new EventSource('event/hook/?token=' + token);
+        eSource.onmessage = function (e) {
+            var data = JSON.parse(e.data);
+            if (data.Data == 'true') {
+                for (e in instance.registeredEvents) {
+                    e = instance.registeredEvents[e];
+                    if (e.key == data.Event) {
+                        e.value();
+                    }
                 }
             }
         }
+        instance.hasHook = true;
+        eSource.onerror = function () {
+            instance.hasHook = false;
+            doConnect(instance, token);
+        }
     }
-
-    eSource.onerror = function () { doConnect(instance, token); }
 }

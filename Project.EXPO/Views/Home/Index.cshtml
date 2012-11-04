@@ -45,24 +45,38 @@
     		<img id="sw" src="Content/img/software.png" />
         </div>
         <div id="sw-pres" class="presentation-block">
+            <span id="sw-pres-content" class="presentation-content">
 
+            </span>
         </div>
         
     	<div id="hardware">
 			<img id="hw" src="Content/img/hardware.png" />
        	</div>
         <div id="hw-pres" class="presentation-block">
+            <span id="hw-pres-content" class="presentation-content">
+
+            </span>
         </div>
         
 		<div id="network">
 			<img id="nw" src="Content/img/network.png" />
 		</div>
         <div id="network-pres" class="presentation-block">
+            <span id="network-pres-content" class="presentation-content">
+
+            </span>
         </div>
 
         <div id="interf-pres-left" class="presentation-block left-page">
+            <span id="interf-pres-content" class="presentation-content">
+
+            </span>
         </div>
         <div id="manage-pres-left" class="presentation-block left-page">       	
+            <span id="manage-pres-content" class="presentation-content">
+
+            </span>
         </div>
     </div>
     
@@ -75,21 +89,34 @@
     <div id="select-window" class="opacity">
     	<div id="select-main">
         <span id="select-session">
-        	<p>Select a session: </p>
-            <select id="session">
-            </select>
+        	<p>Select a session:
+                <select id="session">
+                    @if (Project.EXPO.Collective.SessionPool.Count > 0)
+                    {
+                        foreach(KeyValuePair<string, Project.EXPO.SessionWrap> i in Project.EXPO.Collective.SessionPool) {
+                            @Html.Raw("<option value=\"" + i.Key + "\">" + i.Key + "<option>\n");
+                        }
+                    }
+                    else
+                    {
+                        @Html.Raw("<option value=\"nothing\">No Sessions!<option>");
+                    }
+                </select>
+            </p>
         </span>
         <span id="session-info">
         	<p>Session Information</p>
-            <p>Session Token: </p><p id="token"></p>
-            <p>Left Screen Taken: </p><p id="left-taken"></p>
-            <p>Right Screen Taken: </p><p id="right-taken"></p>
+            <p>Session Token: <span id="token">@try { @Html.Raw(Project.EXPO.Collective.SessionPool.First().Key) } catch(Exception e) { @Html.Raw("none") }</span></p>
+            <p>Left Screen Taken: <span id="left-taken">@try { @Html.Raw(Project.EXPO.Collective.SessionPool.First().Value.LeftFilled.ToString().ToLower()) } catch(Exception e) { @Html.Raw("none") }</span></p>
+            <p>Right Screen Taken: <span id="right-taken">@try { @Html.Raw(Project.EXPO.Collective.SessionPool.First().Value.RightFilled.ToString().ToLower()) } catch(Exception e) { @Html.Raw("none") }</span></p>
         </span>
         <span id="screen-position">
-        	<p><input type="radio" name="position" id="left-screen" />Left Screen</p>
-            <p><input type="radio" name="position" id="right-screen" />Right Screen</p>
+        	<p>Select Screen Position
+                <span><input type="radio" name="position" id="left-screen" />Left Screen</span>
+                <span><input type="radio" name="position" id="right-screen" />Right Screen</span>
+            </p>
         </span>
-        <input type="button" id="start-pres" value="Start" />
+        <span id="start-pres" class="btn btn-primary"><i class="icon-ok icon-white"></i> Start Presentation</span>
         </div>
         <div id="wait-main" style="display: none;">
         	<image id="wait-img" src="Content/img/load.gif" class="loader" />

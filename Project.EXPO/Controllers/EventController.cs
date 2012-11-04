@@ -212,6 +212,19 @@ namespace Project.EXPO.Controllers
             }
         }
 
+        public ActionResult GetSession(string token)
+        {
+            try
+            {
+                return Content(Serializer.Serialize(new SendSession() { Token = token, LeftFilled = Collective.SessionPool[token].LeftFilled, 
+                    RightFilled = Collective.SessionPool[token].RightFilled }));
+            }
+            catch (Exception e)
+            {
+                return Content("Error: An error has occured, please try again.");
+            }
+        }
+
         public ActionResult GetSessions()
         {
             List<SendSession> Temp = new List<SendSession>();

@@ -54,6 +54,15 @@ body {
 	margin-left: 350px;
 }
 
+.presentation-content {
+    position:absolute;
+    left: 15%;
+    top: 30%;
+    width: 70%;
+    height: 40%;
+    opacity: 0;
+}
+
 .presentation-block {
 	position: absolute;
 	display: none;
@@ -110,4 +119,3 @@ body {
 .opacity {
 	opacity: 0.75;	
 }
-

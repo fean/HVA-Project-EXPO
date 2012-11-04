@@ -27,6 +27,20 @@ $(function () {
         } else {
             alert('No screen position or session has been given, so the client cant start!')
         }
+
+    });
+
+    $('#session').change(function () {
+        var tokeninfo = eventHandler.getSession($('#session').val());
+        if (tokeninfo == null) {
+            $('#token').html('none');
+            $('#right-taken').html('none');
+            $('#left-taken').html('none');
+        } else {
+            $('#token').html(tokeninfo.Token);
+            $('#right-taken').html(tokeninfo.RightFilled.toString());
+            $('#left-taken').html(tokeninfo.LeftFilled.toString());
+        }
     });
 	
     eventHandler.registerEvent('onStartLoop', function () {
@@ -77,17 +91,26 @@ $(function () {
     eventHandler.registerEvent('onStartSE', function () {
         if (position) {
             hideElementsRight(function () {
-                setInterval(function () {
+                setTimeout(function () {
                     startAnimatePartialRight('#sw-pres-right', function () {
                         $('#sw-video').show();
                         document.getElementById('sw-video').play();
+                        setTimeout(function () {
+                            endAnimatePartialRight('#sw-pres-right', function () {
+                                showElementsRight(function () { return null });
+                            });
+                        }, 30000);
                     });
                 }, 450);
             });
         } else {
             hideElementsLeft(function () {
                 startAnimateMain('#sw-pres', function () {
-                    //TODO: Make the magic happen		
+                    setTimeout(function () {
+                        endAnimateMain('#sw-pres', function () {
+                            showElementsLeft(function () { return null });
+                        });
+                    }, 30000);
                 });
             });
         }
@@ -96,17 +119,26 @@ $(function () {
     eventHandler.registerEvent('onStartTC', function () {
         if (position) {
             hideElementsRight(function () {
-                setInterval(function () {
+                setTimeout(function () {
                     startAnimatePartialRight('#hw-pres-right', function () {
                         $('#hw-video').show();
                         document.getElementById('hw-video').play();
+                        setTimeout(function () {
+                            endAnimatePartialRight('#hw-pres-right', function () {
+                                showElementsRight(function () { return null });
+                            });
+                        }, 30000);
                     });
                 }, 450);
             });
         } else {
             hideElementsLeft(function () {
                 startAnimateMain('#hw-pres', function () {
-                    //TODO: Make the magic happen		
+                    setTimeout(function () {
+                        endAnimateMain('#hw-pres', function () {
+                            showElementsLeft(function () { return null });
+                        });
+                    }, 30000);
                 });
             });
         }
@@ -118,13 +150,22 @@ $(function () {
                 startAnimateMain('#interf-pres', function () {
                     $('#interf-video').show();
                     document.getElementById('interf-video').play();
+                    setTimeout(function () {
+                        endAnimateMain('#interf-pres', function () {
+                            showElementsRight(function () { return null });
+                        });
+                    }, 30000);
                 });
             });
         } else {
             hideElementsLeft(function () {
-                setInterval(function () {
+                setTimeout(function () {
                     startAnimatePartialLeft('#interf-pres-left', function () {
-                        //TODO: Make the magic happen					
+                        setTimeout(function () {
+                            endAnimatePartialLeft('#interf-pres-left', function () {
+                                showElementsLeft(function () { return null });
+                            });
+                        }, 30000);
                     });
                 }, 450);
             });
@@ -137,13 +178,22 @@ $(function () {
                 startAnimateMain('#manage-pres', function () {
                     $('#manage-video').show();
                     document.getElementById('manage-video').play();
+                    setTimeout(function () {
+                        endAnimateMain('#manage-pres', function () {
+                            showElementsRight(function () { return null });
+                        });
+                    }, 30000);
                 });
             });
         } else {
             hideElementsLeft(function () {
-                setInterval(function () {
+                setTimeout(function () {
                     startAnimatePartialLeft('#manage-pres-left', function () {
-                        //TODO: Make the magic happen
+                        setTimeout(function () {
+                            endAnimatePartialLeft('#manage-pres-left', function () {
+                                showElementsLeft(function () { return null });
+                            });
+                        }, 30000);
                     });
                 }, 450);
             });
@@ -153,31 +203,32 @@ $(function () {
     eventHandler.registerEvent('onStartSNE', function () {
         if (position) {
             hideElementsRight(function () {
-                setInterval(function () {
+                setTimeout(function () {
                     startAnimatePartialRight('#network-pres-right', function () {
                         $('#network-video').show();
                         document.getElementById('network-video').play();
+                        setTimeout(function () {
+                            endAnimatePartialRight('#network-pres-right', function () {
+                                showElementsRight(function () { return null });
+                            });
+                        }, 30000);
                     });
                 }, 450);
             });
         } else {
             hideElementsLeft(function () {
                 startAnimateMain('#network-pres', function () {
-                    //TODO: Make the magic happen			
+                    setTimeout(function () {
+                        endAnimateMain('#network-pres', function () {
+                            showElementsLeft(function () { return null });
+                        });
+                    }, 30000);
                 });
             });
         }
     });
 
-    var sessions = eventHandler.getAvailableSessions();
-    if (sessions !== null) {
-        $('#session').html('');
-        for (e in sessions) {
-            $('#session').append('<option value="' + sessions[e].Token + '">' + sessions[e].Token + '</option>');
-        }
-    } else {
-        $('#session').html('<option value="nothing">No Sessions</option>');
-    }
+    $('#session').children().filter('[value|=""]').each(function(i, value) { value.outerHTML = '' });
 });
 
 //Visual Engine
@@ -191,7 +242,7 @@ function hideElementsRight(method) {
             });
         });
     });
-    setInterval(method, 550);
+    setTimeout(method, 550);
 }
 
 function showElementsRight(method) {
@@ -215,7 +266,7 @@ function hideElementsLeft(method) {
             });
         });
     });
-    setInterval(method, 550);
+    setTimeout(method, 550);
 }
 
 function showElementsLeft(method) {
@@ -237,28 +288,44 @@ function startAnimateMain(selector, complete) {
         width: '100%',
         height: '90%',
         opacity: 1.0
-    }, 400, 'swing', complete);
+    }, 400, 'swing', function () {
+        $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 1 }, 150, 'swing', complete);
+    });
 }
 
 function endAnimateMain(selector, complete) {
-    $(selector).animate({
-        top: '45%',
-        left: '45%',
-        width: '10%',
-        height: '10%',
-        opacity: 0
-    }, 400, 'swing', complete);
-    $(selector).hide();
+    setTimeout(function () {
+        $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 0 }, 150, 'swing', function () {
+            $(selector).animate({
+                top: '45%',
+                left: '45%',
+                width: '10%',
+                height: '10%',
+                opacity: 0
+            }, 400, 'swing', function () {
+                $(selector).hide();
+                $(selector.replace('-left', '').replace('-right', '') + '-content').hide();
+                complete();
+            });
+        });
+    }, 450);
 }
 
 function startAnimatePartialRight(selector, complete) {
     $(selector).show();
-    $(selector).animate({ width: '100%' }, 400, 'swing', complete);
+    $(selector).animate({ width: '100%' }, 400, 'swing', function () {
+        $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 1 }, 150, 'swing', complete);
+    });
 }
 
 function endAnimatePartialRight(selector, complete) {
-    $(selector).animate({ width: '0%' }, 400, 'swing', complete);
-    $(selector).hide();
+    $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 0 }, 150, 'swing', function () {
+        $(selector).animate({ width: '0%' }, 400, 'swing', function () {
+            $(selector).hide();
+            $(selector.replace('-left', '').replace('-right', '') + '-content').hide();
+            complete();
+        });
+    });
 }
 
 function startAnimatePartialLeft(selector, complete) {
@@ -266,13 +333,20 @@ function startAnimatePartialLeft(selector, complete) {
     $(selector).animate({
         width: '100%',
         left: '0%'
-    }, 400, 'swing', complete);
+    }, 400, 'swing', function () {
+        $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 1 }, 150, 'swing', complete);
+    });
 }
 
 function endAnimatePartialLeft(selector, complete) {
-    $(selector).animate({
-        width: '0%',
-        left: '100%'
-    }, 400, 'swing', complete);
-    $(selector).hide();
+    $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 0 }, 150, 'swing', function () {
+        $(selector).animate({
+            width: '0%',
+            left: '100%'
+        }, 400, 'swing', function () {
+            $(selector).hide();
+            $(selector.replace('-left', '').replace('-right', '') + '-content').hide();
+            complete();
+        });
+    });
 }

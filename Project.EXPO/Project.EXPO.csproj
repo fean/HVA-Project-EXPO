@@ -128,7 +128,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\img\error.png" />
+    <Content Include="Content\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="Content\img\hardware.png" />
     <Content Include="Content\img\interface.png" />
     <Content Include="Content\img\itopia-logo.png" />
