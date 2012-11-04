@@ -289,13 +289,13 @@ function startAnimateMain(selector, complete) {
         height: '90%',
         opacity: 1.0
     }, 400, 'swing', function () {
-        $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 1 }, 150, 'swing', complete);
+        $(selector + '-content').animate({ opacity: 1 }, 150, 'swing', complete);
     });
 }
 
 function endAnimateMain(selector, complete) {
     setTimeout(function () {
-        $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 0 }, 150, 'swing', function () {
+        $(selector + '-content').animate({ opacity: 0 }, 150, 'swing', function () {
             $(selector).animate({
                 top: '45%',
                 left: '45%',
@@ -304,7 +304,7 @@ function endAnimateMain(selector, complete) {
                 opacity: 0
             }, 400, 'swing', function () {
                 $(selector).hide();
-                $(selector.replace('-left', '').replace('-right', '') + '-content').hide();
+                $(selector + '-content').hide();
                 complete();
             });
         });
@@ -314,15 +314,15 @@ function endAnimateMain(selector, complete) {
 function startAnimatePartialRight(selector, complete) {
     $(selector).show();
     $(selector).animate({ width: '100%' }, 400, 'swing', function () {
-        $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 1 }, 150, 'swing', complete);
+        $(selector.replace('-left', '-content').replace('-right', '-content')).animate({ opacity: 1 }, 150, 'swing', complete);
     });
 }
 
 function endAnimatePartialRight(selector, complete) {
-    $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 0 }, 150, 'swing', function () {
+    $(selector.replace('-left', '-content').replace('-right', '-content')).animate({ opacity: 0 }, 150, 'swing', function () {
         $(selector).animate({ width: '0%' }, 400, 'swing', function () {
             $(selector).hide();
-            $(selector.replace('-left', '').replace('-right', '') + '-content').hide();
+            $(selector.replace('-left', '-content').replace('-right', '-content')).hide();
             complete();
         });
     });
@@ -334,18 +334,18 @@ function startAnimatePartialLeft(selector, complete) {
         width: '100%',
         left: '0%'
     }, 400, 'swing', function () {
-        $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 1 }, 150, 'swing', complete);
+        $(selector.replace('-left', '-content').replace('-right', '-content')).animate({ opacity: 1 }, 150, 'swing', complete);
     });
 }
 
 function endAnimatePartialLeft(selector, complete) {
-    $(selector.replace('-left', '').replace('-right', '') + '-content').animate({ opacity: 0 }, 150, 'swing', function () {
+    $(selector.replace('-left', '-content').replace('-right', '-content')).animate({ opacity: 0 }, 150, 'swing', function () {
         $(selector).animate({
             width: '0%',
             left: '100%'
         }, 400, 'swing', function () {
             $(selector).hide();
-            $(selector.replace('-left', '').replace('-right', '') + '-content').hide();
+            $(selector.replace('-left', '-content').replace('-right', '-content')).hide();
             complete();
         });
     });
