@@ -24,9 +24,35 @@ namespace Project.EXPO.Controllers
         public ActionResult Create()
         {
                 String token = Convert.ToBase64String((new HMACMD5()).ComputeHash(Encoding.ASCII.GetBytes((new Random()).Next(10000, 999999999).ToString())));
-                token = token.Remove(token.Length - 2).Replace("+", string.Empty).Replace("/", string.Empty).Replace("=", string.Empty).ToLower();
+                token = token.Replace("+", string.Empty).Replace("/", string.Empty).Replace("=", string.Empty).ToLower();
                 Collective.SessionPool.Add(token, new SessionWrap());
                 return Content(Serializer.Serialize(new SessionResult() { Action = true, SessionToken = token }));
+        }
+
+        public ActionResult Delete(string token)
+        {
+            try
+            {
+                Collective.SessionPool.Remove(token);
+                return Content(Serializer.Serialize(new StandardResult() { Action = true }));
+            }
+            catch (Exception e)
+            {
+                return Content(Serializer.Serialize(new StandardResult() { Action = false }));
+            }
+        }
+
+        public ActionResult Reset()
+        {
+            try
+            {
+                Collective.SessionPool = new Dictionary<string, SessionWrap>();
+                return Content(Serializer.Serialize(new StandardResult() { Action = true }));
+            }
+            catch (Exception e)
+            {
+                return Content(Serializer.Serialize(new StandardResult() { Action = false }));
+            }
         }
         
         public ActionResult StartLoop(string token)

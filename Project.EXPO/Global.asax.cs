@@ -9,8 +9,6 @@ using System.Web.Routing;
 
 namespace Project.EXPO
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -24,9 +22,9 @@ namespace Project.EXPO
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                "Default",
+                "{controller}/{action}/{token}",
+                new { controller = "Home", action = "Index", token = UrlParameter.Optional }
             );
 
         }
@@ -34,10 +32,7 @@ namespace Project.EXPO
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
-            // Use LocalDB for Entity Framework by default
             Database.DefaultConnectionFactory = new SqlConnectionFactory(@"Data Source=(localdb)\v11.0; Integrated Security=True; MultipleActiveResultSets=True");
-
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }
