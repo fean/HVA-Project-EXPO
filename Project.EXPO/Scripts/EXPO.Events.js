@@ -22,7 +22,7 @@
 
     this.getSession = function (token) {
         var req = new XMLHttpRequest();
-        req.open('GET', 'event/getsession/?token=' + token, false); req.send();
+        req.open('GET', 'event/getsession/' + token, false); req.send();
         var response = req.responseText;
         if (response == 'Error: An error has occured, please try again.') {
             return null;
@@ -44,7 +44,7 @@
 //Async functions
 function doConnect(instance, token) {
     if (!instance.hasHook) {
-        var eSource = new EventSource('event/hook/?token=' + token);
+        var eSource = new EventSource('event/hook/' + token);
         eSource.onmessage = function (e) {
             var data = JSON.parse(e.data);
             if (data.Data == 'true') {

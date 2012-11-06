@@ -135,6 +135,7 @@
     <Content Include="Content\img\hardware.png" />
     <Content Include="Content\img\interface.png" />
     <Content Include="Content\img\itopia-logo.png" />
+    <Content Include="Content\img\itopia-watermark.png" />
     <Content Include="Content\img\load.gif" />
     <Content Include="Content\img\management.png" />
     <Content Include="Content\img\network.png" />
